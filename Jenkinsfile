@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        // 👇 This pulls Maven from "Manage Jenkins → Global Tool Configuration"
+        maven 'Maven_3.9.11'
+    }
+
     stages {
 
         // ===== FRONTEND BUILD =====
@@ -30,6 +35,7 @@ pipeline {
         stage('Build Backend') {
             steps {
                 dir('STUDENTAPI-SPRINGBOOT') {
+                    // 👇 now Jenkins injects correct Maven path
                     bat 'mvn clean package'
                 }
             }
